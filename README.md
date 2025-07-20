@@ -106,3 +106,41 @@ function PostCard({ post, currentUser, refreshPosts }) {
 }
 
 export default PostCard;
+
+
+import axios from "axios";
+const BASE_URL = "http://localhost:5000/api/posts";
+
+export const createPost = async (postData) => {
+  return await axios.post(`${BASE_URL}/create`, postData);
+};
+
+export const getAllPosts = async () => {
+  return await axios.get(BASE_URL);
+};
+
+export const toggleLike = async (postId, userId) => {
+  return await axios.post(`${BASE_URL}/${postId}/like`, { userId });
+};
+
+import axios from "axios";
+const BASE_URL = "http://localhost:5000/api/comments";
+
+export const createComment = async (postId, commentText) => {
+  return await axios.post(`${BASE_URL}/${postId}`, { comment: commentText });
+};
+
+export const getComments = async (postId) => {
+  return await axios.get(`${BASE_URL}/${postId}`);
+};
+
+import axios from "axios";
+const BASE_URL = "http://localhost:5000/api/share";
+
+export const sharePost = async (postId, userId) => {
+  return await axios.post(`${BASE_URL}/${postId}`, { userId });
+};
+
+export const getShares = async (postId) => {
+  return await axios.get(`${BASE_URL}/${postId}`);
+};
